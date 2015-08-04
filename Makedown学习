@@ -105,4 +105,80 @@ Markdown让你可以自然地书写字符，需要转换的有它来处理。如
 ###区段元素
 ####链接
     
+    markdown支持的链接支持行内式和参考式两种。
+        行内式：在方括号后面紧接着圆括号并插入网址链接即可，如果要在连接的title文字，只要在网址后面，用双引号把title文字包起来即可。
+        
+            如果你要是链接同样的主机资源，可以使用相对路径：
+                See my [About](http://www.baidu.com/ heh) page for details
+See my [About](http://www.baidu.com/ "heh") page for details.
+
+        参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记。
+            
+            参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：
+                This is [an example] [id] reference-style link
+            
+            你可以选择性的在另个方括号之间加入空格。
+            
+            接着在文件的任意出，你可以把这个标记的内容定义出来：
+                [id]: http://www.baidu.com/ "baidu"
+                
+                链接内容定义的形式为：
+                    方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字
+                    接着一个冒号
+                    接着一个以上的空格或制表符
+                    接着链接的网址
+                    选择性地接着 title 内容，可以用单引号、双引号或是括弧包着
+See my [About][hehe] page for details.
+[hehe]:http://www.baidu.com "haha"
+
+        网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。
+
+        链接辨别标签可以有字母、数字、空白和标点符号，但是并不区分大小写，因此下面两个链接是一样的：
+        
+        隐式链接标记功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号，如果你要让 "Google" 链接到 google.com，你可以简化成：
+        [Google][]
+        然后定义链接内容：
+            [Google]: http://google.com/
+
+###强调
+    markdown使用（*）和底线（_）作为标记强调字词的符号，被*或_包围的字词会被转成用<em>标签包围。用两个*或_标签包围的话，会被转成<strong>.
     
+    如果*和_两边都是空白的话，他就会被当做普通符号
+    
+*single asterisks*
+
+_single underscores_
+
+**double asterisks**
+
+__double underscores__
+
+###代码
+    如果要标记一小段行内代码，你可以用反引号把它包起来（`）
+use the `printf()` function
+
+    如果要在代码区段内插入反引号，可以用多个反引号来开启和结束代码区段：
+``This is a literal backtick(`) here.``
+    
+    在代码区段内，&和方括号都会被自动转成HTML实体，这使得插入HTML原始码变得很容易。
+
+###图片
+    很明显，使用纯文本插入图片有难度，但是用Markdown提供了和链接相似的语法来标记图片。同样允许两种形式：行内式和参考式。
+    
+    行内式的图片看起来像是：
+    ![Alt text](/path/to/img.jpg)
+    ![Alt text](/path/to/img.jpg "Optional title")
+    
+    参考式的图片语法向
+        ![Alt text][id]
+        [id]: url/to/image  "Optional title attribute"
+
+###其他
+
+####自动链接
+    只要用尖括号抱起来，markdown就会自动将他转成链接，一般网址的链接文字和链接地址一样。如
+        <http://example.com/>
+        会被转为：
+        <a href="http://example.com/">http://example.com/</a>
+        
+####反斜杠
